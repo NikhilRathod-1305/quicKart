@@ -1,10 +1,10 @@
-import users from "../models/users.js";
+import users from "../models/User.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export const register = async (req, res, next) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, role } = req.body;
         const userExists = await users.findOne({ email });
 
         if (userExists) {
@@ -18,7 +18,8 @@ export const register = async (req, res, next) => {
         const user = await users.create({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            role
         });
         res.status(201).json({
             success: true,

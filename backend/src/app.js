@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/auth.routes.js'
+import productRoutes from './routes/product.routes.js';
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.get('/health', (req,res) => {
     res.json({status:"quicKart backend running"})
 });
 
-app.use('/api/auth',authRoutes)
+app.use('/api/auth',authRoutes);
+app.use('/api/products',productRoutes)
 
 export default app;
